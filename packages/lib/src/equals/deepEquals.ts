@@ -21,7 +21,7 @@ export function deepEquals(a: unknown, b: unknown): boolean {
   }
 
   for (const key of keysA) {
-    if (!keysB.includes(key)) {
+    if (!(key in b)) {
       return false;
     }
     if (!deepEquals((a as Record<string, unknown>)[key], (b as Record<string, unknown>)[key])) {
