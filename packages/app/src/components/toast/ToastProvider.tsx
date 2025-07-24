@@ -50,12 +50,11 @@ export const ToastProvider = memo(({ children }: PropsWithChildren) => {
     hideAfter();
   });
 
-  const memodedState = useMemo(() => ({ message: state.message, type: state.type }), [state.message, state.type]);
   const memoedAction = useMemo(() => ({ show: showWithHide, hide }), [showWithHide, hide]);
 
   return (
     <ToastActionContext.Provider value={memoedAction}>
-      <ToastStateContext.Provider value={memodedState}>
+      <ToastStateContext.Provider value={state}>
         {children}
         {visible && createPortal(<Toast />, document.body)}
       </ToastStateContext.Provider>

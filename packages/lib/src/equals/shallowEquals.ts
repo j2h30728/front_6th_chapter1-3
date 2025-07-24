@@ -9,15 +9,15 @@ export function shallowEquals(a: unknown, b: unknown): boolean {
     return false;
   }
   // 3. 객체의 키 개수가 다른 경우 처리
-  const kyesA = Object.keys(a);
+  const keysA = Object.keys(a);
   const keysB = Object.keys(b);
 
-  if (kyesA.length !== keysB.length) {
+  if (keysA.length !== keysB.length) {
     return false;
   }
   // 4. 모든 키에 대해 얕은 비교 수행
-  for (const key of kyesA) {
-    if (!(key in b) || (a as Record<string, unknown>)[key] !== (b as Record<string, unknown>)[key]) {
+  for (const key of keysA) {
+    if (!(key in b) || !Object.is((a as Record<string, unknown>)[key], (b as Record<string, unknown>)[key])) {
       return false;
     }
   }
